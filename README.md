@@ -39,3 +39,31 @@
 |conf t|
 |username jun14 privilege 15 secret P@ssw0rd|
 |enable password wsr|
+
+# Настрока  Trunk И Разрешенные vlan
+|SW1|SW2|SW3|
+|---|---|---|
+|int r fa0/2-3,int r fa0/6-7,int 0/4-5|int r fa0/2-3,int r fa0/6-7,int 0/4-5 |int r fa0/2-3,int r fa0/6-7,int 0/4-5|                                          
+|switchport mode trunk|switchport mode trunk|switchport mode trunk|
+|switchport trunk allowed vlan 100,110,120|switchport trunk allowed vlan 100,110,120|switchport trunk allowed vlan 100,110,120|
+
+# Настройка подсетей Утройств
+|SW3|R1|
+| --- |---|
+|```enable``` |```enable``` |
+| ```conf t```| ```conf t```|
+|```interface gi0/0.100```|```interface gi0/0.100```|
+|```no shutdown```|```no shutdown```|
+|```encapsulation dot1q 100```|```encapsulation dot1q 100```|
+|```ip address 192.168.100.254 255.255.255.0```|```ip address 192.168.100.254 255.255.255.0```|
+|```interface gi0/0.110```|```interface gi0/0.110```|
+|```no shutdown```|```no shutdown```|
+|```encapsulation dot1q 110```|```encapsulation dot1q 110```|
+|```ip address 192.168.110.254 255.255.255.0```|```ip address 192.168.110.254 255.255.255.0```|
+|```interface gi0/0.120```|```interface gi0/0.120```|
+|```no shutdown```|```no shutdown```|
+|```encapsulation dot1q 120```|```encapsulation dot1q 120```|
+|```ip address 192.168.120.254 255.255.255.0```|```ip address 192.168.120.254 255.255.255.0```|
+|```interface gi0/0```|```interface gi0/0```|
+|```no shutdown```|```no shutdown```|
+|```do copy running-config startup-config```|```do copy running-config startup-config```|
